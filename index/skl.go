@@ -27,7 +27,7 @@ type (
 
 	// Element element is the data stored.
 	Element struct {
-		Node
+		Node  // 第一个元素是原始链表中下一个节点的地址. 第二个是一级索引中该元素的下一个节点的地址, 依次类推...
 		key   []byte
 		value interface{}
 	}
@@ -47,7 +47,7 @@ type (
 // NewSkipList create a new skip list.
 func NewSkipList() *SkipList {
 	return &SkipList{
-		Node:           Node{next: make([]*Element, maxLevel)},
+		Node:           Node{next: make([]*Element, maxLevel)}, // 存储每一层的第一个元素
 		prevNodesCache: make([]*Node, maxLevel),
 		maxLevel:       maxLevel,
 		randSource:     rand.New(rand.NewSource(time.Now().UnixNano())),
